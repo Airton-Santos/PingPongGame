@@ -1,24 +1,32 @@
 // Variaveis
 const canvasElement = document.querySelector("canvas")
 const canvasContext = canvasElement.getContext("2d")
-
 const lineWidth = 15 // Largura da linha do central do campo
+
+const filed = {
+    w: window.innerWidth, //Largura
+    h: window.innerHeight, //Altura
+    draw: function () {
+        canvasContext.fillStyle = "#286047" //Escolhe a cor do campo
+        canvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight) //Extensão do campo
+    }
+}
 
 function setup(){
     //Definição de propiedades
 
     //largura da tela
-    canvasElement.width = canvasContext.width = window.innerWidth
+    canvasElement.width = canvasContext.width = filed.w
 
     //Altura da tela
-    canvasElement.height = canvasContext.height = window.innerHeight
+    canvasElement.height = canvasContext.height = filed.h
 }
 
 //Desenhar componentes
 
 function draw(){
-    canvasContext.fillStyle = "#286047" //Escolhe a cor do campo
-    canvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight) //Extensão do campo
+
+    filed.draw()
 
     canvasContext.fillStyle = "#ffffff" //Escolhe a cor da linha do central do campo
 
@@ -52,7 +60,7 @@ function draw(){
     canvasContext.fillStyle = "#01341D"
     canvasContext.fillText('0', window.innerWidth / 4, 50) // 25% da largura da janela. 50 = Y 50 pixels do topo.
     canvasContext.fillText('0', window.innerWidth / 4 + window.innerWidth / 2 , 50) // Posição X: (25% + 50%) da largura da tela = 75% da largura da janela.
-    
+
 
 }
 

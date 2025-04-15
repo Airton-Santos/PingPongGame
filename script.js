@@ -1,7 +1,7 @@
 // Variaveis
 const canvasElement = document.querySelector("canvas")
 const canvasContext = canvasElement.getContext("2d")
-const lineWidth = 15 // Largura da linha do central do campo
+const gapX = 10
 
 const filed = {
     w: window.innerWidth, //Largura
@@ -29,6 +29,31 @@ const line = {
     }
 }
 
+    //desenhar a raquete da esquerda
+const leftPaddle = {
+    x: gapX,
+    y: 400,
+    w: line.w,
+    h: 200,
+    draw: function () {
+        canvasContext.fillRect(this.x, this.y, this.w, this.h) //X, Altura que vai seguir o mouse, largura da linha central, Altura da raquete
+    }
+}
+
+    //desenhar a raquete da direita
+const rigthPaddle = {
+    x: filed.w - line.w - gapX,
+    y: 400,
+    w: line.w,
+    h: 200,
+    draw: function () {
+        canvasContext.fillRect(this.x, this.y, this.w, this.h) //X, Altura que vai seguir o mouse, largura da linha central, Altura da raquete
+    }
+}
+
+
+
+
 function setup(){
     //Definição de propiedades
 
@@ -43,18 +68,16 @@ function setup(){
 
 function draw(){
 
-    filed.draw()
+    filed.draw() //desenhando campo com objeto
 
-    line.draw()
+    line.draw() //desenhando a linha com objeto
 
+    leftPaddle.draw() //desenhando raquete esquerda com objeto
 
-    //Desenhar raquete da esquerda
+    rigthPaddle.draw() //desenhando raquete esquerda com objeto
 
-    canvasContext.fillRect(10, 400, lineWidth, 200) //X, Altura que vai seguir o mouse, largura da linha central, Altura da raquete
-
-    //desenhar a raquete da direita
     
-    canvasContext.fillRect(innerWidth - lineWidth - 10, 400, lineWidth, 200) //X, Altura que vai seguir o mouse, largura da linha central, Altura da raquete
+    
 
     //desenhar bola
     canvasContext.beginPath() 

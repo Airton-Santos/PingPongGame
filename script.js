@@ -8,7 +8,24 @@ const filed = {
     h: window.innerHeight, //Altura
     draw: function () {
         canvasContext.fillStyle = "#286047" //Escolhe a cor do campo
-        canvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight) //Extensão do campo
+        canvasContext.fillRect(0, 0, this.w, this.h) //Extensão do campo
+    }
+}
+
+const line = {
+    w: 15, //Largura
+    h: filed.h, //Altura
+    draw: function () {
+        canvasContext.fillStyle = "#ffffff" //Escolhe a cor da linha do central do campo
+
+        //Definição da linha do central do campo
+
+        const x = filed.w / 2 - this.w / 2
+        const y = 0 
+        const w = this.w // largura 
+        const h = this.h //Altura 
+
+        canvasContext.fillRect(x, y, w, h) //desenha linha central
     }
 }
 
@@ -28,16 +45,7 @@ function draw(){
 
     filed.draw()
 
-    canvasContext.fillStyle = "#ffffff" //Escolhe a cor da linha do central do campo
-
-    //Definição da linha do central do campo
-
-    const x = window.innerWidth / 2 - lineWidth / 2
-    const y = 0 
-    const w = lineWidth // largura 
-    const h = window.innerHeight //Altura 
-
-    canvasContext.fillRect(x, y, w, h) //desenha linha central
+    line.draw()
 
 
     //Desenhar raquete da esquerda

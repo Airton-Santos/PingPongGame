@@ -39,6 +39,13 @@ function draw(){
     //desenhar a raquete da direita
     
     canvasContext.fillRect(innerWidth - lineWidth - 10, 400, lineWidth, 200) //X, Altura que vai seguir o mouse, largura da linha central, Altura da raquete
+
+    //desenhar bola
+    canvasContext.beginPath() 
+    canvasContext.arc(500, 300, 20, 0 , 2 *Math.PI, false) //X, Y, Raio, Arco
+    canvasContext.fill()
+
+
 }
 
 setup()

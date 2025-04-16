@@ -63,8 +63,8 @@ const rigthPaddle = {
 }
 
 const score = {
-    human: 1,
-    computer: 2,
+    human: 0,
+    computer: 0,
     increaseHuman: function() {
         this.human ++
     },
@@ -87,7 +87,7 @@ const ball = {
     x: 0,
     y: 0,
     r: 20,
-    speed: 3,
+    speed: 5,
     _directionY: 1,
     _directionX: 1,
     _calcposition: function () {
@@ -108,6 +108,20 @@ const ball = {
                 score.increaseHuman()
                 this._pointUp()
             }
+        }
+
+        //Verificar se o jogador 2 fez ponto
+
+        if(this.x < this.r + leftPaddle.w + gapX){
+            //verificar se a raquete esquerda está na posição da bola
+            if(this.y + this.r > leftPaddle.y && this.y - this.r < leftPaddle.y + leftPaddle.h){
+            //rebate a bola  invertendo o sinal de x
+                this._reverseX()
+            } else {
+                score.increaseComputer()
+                this._pointUp()
+            }
+
         }
 
         //verificar laterais superiores e inferiores

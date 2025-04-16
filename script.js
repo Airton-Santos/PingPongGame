@@ -78,13 +78,29 @@ const score = {
 
 
 const ball = {
-    x: 300,
-    y: 200,
+    x: 0,
+    y: 0,
     r: 20,
     speed: 5,
+    _directionY: 1,
+    _directionX: 1,
+    _calcposition: function () {
+        if(
+            (this.y - this.r < 0 && this._directionY < 0) ||
+            (this.y > filed.h - this.r && this._directionY > 0)
+        ){
+            this._reverseY()
+        }
+    },
+    _reverseY: function () {
+        this._directionY *= -1
+    },
+    _reverseX: function () {
+        this._directionX *= -1
+    },
     _move: function () { //função para mover a bola
-        this.x += 1 * this.speed
-        this.y += 1 * this.speed
+        this.x += this._directionX * this.speed
+        this.y += this._directionY * this.speed
     },
     draw: function () {
         canvasContext.fillStyle = "#ffffff" //Escolhe a cor da bola
@@ -92,6 +108,7 @@ const ball = {
         canvasContext.arc(this.x, this.y, this.r, 0 , 2 *Math.PI, false) //X, Y, Raio, Arco
         canvasContext.fill()
 
+        this._calcposition()
         this._move()
     }
 }

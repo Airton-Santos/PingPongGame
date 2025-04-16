@@ -51,7 +51,32 @@ const rigthPaddle = {
     }
 }
 
+const score = {
+    human: 1,
+    computer: 2,
+    draw: function() {
+        canvasContext.font = "bold 72px Arial"
+        canvasContext.textAlign = 'center'
+        canvasContext.textBaseline = 'top'
+        canvasContext.fillStyle = "#01341D"
+        canvasContext.fillText(this.human, filed.w / 4, 50) // 25% da largura da janela. 50 = Y 50 pixels do topo.
+        canvasContext.fillText(this.computer, filed.w / 4 + window.innerWidth / 2 , 50) // Posição X: (25% + 50%) da largura da tela = 75% da largura da janela.
 
+    }
+}
+
+
+const ball = {
+    x: 300,
+    y: 200,
+    r: 20,
+    draw: function () {
+        canvasContext.fillStyle = "#ffffff" //Escolhe a cor da bola
+        canvasContext.beginPath() 
+        canvasContext.arc(this.x, this.y, this.r, 0 , 2 *Math.PI, false) //X, Y, Raio, Arco
+        canvasContext.fill()
+    }
+}
 
 
 function setup(){
@@ -76,22 +101,9 @@ function draw(){
 
     rigthPaddle.draw() //desenhando raquete esquerda com objeto
 
-    
-    
+    score.draw() //desenhar placar com objeto
 
-    //desenhar bola
-    canvasContext.beginPath() 
-    canvasContext.arc(500, 300, 20, 0 , 2 *Math.PI, false) //X, Y, Raio, Arco
-    canvasContext.fill()
-
-    //desenhar Placar
-    canvasContext.font = "bold 72px Arial"
-    canvasContext.textAlign = 'center'
-    canvasContext.textBaseline = 'top'
-    canvasContext.fillStyle = "#01341D"
-    canvasContext.fillText('0', window.innerWidth / 4, 50) // 25% da largura da janela. 50 = Y 50 pixels do topo.
-    canvasContext.fillText('0', window.innerWidth / 4 + window.innerWidth / 2 , 50) // Posição X: (25% + 50%) da largura da tela = 75% da largura da janela.
-
+    ball.draw() //desenhando a bola com objeto
 
 }
 

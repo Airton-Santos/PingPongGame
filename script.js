@@ -52,8 +52,13 @@ const rigthPaddle = {
     y: 400,
     w: line.w,
     h: 200,
+    _move: function (){
+        this.y = ball.y
+    },
     draw: function () {
         canvasContext.fillRect(this.x, this.y, this.w, this.h) //X, Altura que vai seguir o mouse, largura da linha central, Altura da raquete
+
+        this._move()
     }
 }
 

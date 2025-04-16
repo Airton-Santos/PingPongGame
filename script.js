@@ -2,6 +2,7 @@
 const canvasElement = document.querySelector("canvas")
 const canvasContext = canvasElement.getContext("2d")
 const gapX = 10
+const mouse = { x: 0, y: 0}
 
 const filed = {
     w: window.innerWidth, //Largura
@@ -32,11 +33,16 @@ const line = {
     //desenhar a raquete da esquerda
 const leftPaddle = {
     x: gapX,
-    y: 400,
+    y: 0,
     w: line.w,
     h: 200,
+    _move: function (){
+        this.y = mouse.y - this.h /2 
+    },
     draw: function () {
         canvasContext.fillRect(this.x, this.y, this.w, this.h) //X, Altura que vai seguir o mouse, largura da linha central, Altura da raquete
+
+        this._move()
     }
 }
 
@@ -134,3 +140,10 @@ function main() {
 
 setup()
 main()
+
+canvasElement.addEventListener('mousemove', function(e){
+    mouse.x = e.pageX
+    mouse.y = e.pageY
+
+    console.log(mouse)
+})

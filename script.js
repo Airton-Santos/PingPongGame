@@ -70,11 +70,18 @@ const ball = {
     x: 300,
     y: 200,
     r: 20,
+    speed: 5,
+    _move: function () { //função para mover a bola
+        this.x += 1 * this.speed
+        this.y += 1 * this.speed
+    },
     draw: function () {
         canvasContext.fillStyle = "#ffffff" //Escolhe a cor da bola
         canvasContext.beginPath() 
         canvasContext.arc(this.x, this.y, this.r, 0 , 2 *Math.PI, false) //X, Y, Raio, Arco
         canvasContext.fill()
+
+        this._move()
     }
 }
 
@@ -107,5 +114,23 @@ function draw(){
 
 }
 
+window.animateFrame = (function () {
+    return (
+        window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||  
+        window.msRequestAnimationFrame ||
+        function (callback) {
+            return window.setTimeout(callback, 1000 / 60)
+        }
+    )
+})()
+
+function main() {
+    animateFrame(main)
+    draw()
+}
+
 setup()
-draw()
+main()

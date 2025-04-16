@@ -65,6 +65,12 @@ const rigthPaddle = {
 const score = {
     human: 1,
     computer: 2,
+    increaseHuman: function() {
+        this.human ++
+    },
+    increaseComputer: function() {
+        this.computer ++
+    },
     draw: function() {
         canvasContext.font = "bold 72px Arial"
         canvasContext.textAlign = 'center'
@@ -85,6 +91,22 @@ const ball = {
     _directionY: 1,
     _directionX: 1,
     _calcposition: function () {
+        //verificar se o jogador fez ponto
+
+        if(this.x > filed.w - this.r - rigthPaddle.w - gapX){
+            //verificar se a raquete direita está na posição da bola
+            if(this.y + this.r > rigthPaddle.y && this.y - this.r < rigthPaddle.y + rigthPaddle.h){ //verificação da parte inferior e superior
+                //rebater a bola invertendo o x
+                this._reverseX
+            } else {
+                //pontuar o jogador
+                score.increaseHuman()
+                this._pointUp()
+            }
+        }
+
+        //verificar laterais superiores e inferiores
+
         if(
             (this.y - this.r < 0 && this._directionY < 0) ||
             (this.y > filed.h - this.r && this._directionY > 0)
@@ -97,6 +119,10 @@ const ball = {
     },
     _reverseX: function () {
         this._directionX *= -1
+    },
+    _pointUp: function () {
+        this.x = filed.w / 2
+        this.y = filed.h / 2
     },
     _move: function () { //função para mover a bola
         this.x += this._directionX * this.speed

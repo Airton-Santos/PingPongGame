@@ -87,17 +87,22 @@ const ball = {
     x: 0,
     y: 0,
     r: 20,
-    speed: 5,
+    speed: 3,
     _directionY: 1,
     _directionX: 1,
     _calcposition: function () {
         //verificar se o jogador fez ponto
 
         if(this.x > filed.w - this.r - rigthPaddle.w - gapX){
+ 
             //verificar se a raquete direita está na posição da bola
-            if(this.y + this.r > rigthPaddle.y && this.y - this.r < rigthPaddle.y + rigthPaddle.h){ //verificação da parte inferior e superior
+            if(
+                this.y + this.r > rigthPaddle.y && 
+                this.y - this.r < rigthPaddle.y + rigthPaddle.h
+            ){ //verificação da parte inferior e superior
+
                 //rebater a bola invertendo o x
-                this._reverseX
+                this._reverseX()
             } else {
                 //pontuar o jogador
                 score.increaseHuman()

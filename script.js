@@ -52,8 +52,16 @@ const rigthPaddle = {
     y: 400,
     w: line.w,
     h: 200,
+    speed: 5,
     _move: function (){
-        this.y = ball.y
+        if(this.y + this.h / 2  < ball.y + ball.r){
+            this.y += this.speed
+        } else {
+            this.y -= this.speed
+        }
+    },
+    speedUP: function () {
+        this.speed += 1
     },
     draw: function () {
         canvasContext.fillRect(this.x, this.y, this.w, this.h) //X, Altura que vai seguir o mouse, largura da linha central, Altura da raquete
@@ -139,7 +147,13 @@ const ball = {
     _reverseX: function () {
         this._directionX *= -1
     },
+    _speedUp: function (){
+        this.speed += 2
+    },
     _pointUp: function () {
+        this._speedUp()
+        rigthPaddle.speedUP()
+
         this.x = filed.w / 2
         this.y = filed.h / 2
     },
